@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'coin_data.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -9,7 +10,7 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
 
-  List<DropdownMenuItem> getDropdownItems() {
+  DropdownButton<String> getDropdownButton() {
     List<DropdownMenuItem<String>> dropdownItems = [];
 
     for (int i = 0; i < currenciesList.length; i++) {
@@ -19,7 +20,32 @@ class _PriceScreenState extends State<PriceScreen> {
       );
       dropdownItems.add(item);
     }
-    return dropdownItems;
+
+    return DropdownButton(
+        value: selectedCurrency,
+        iconSize: 40,
+        items: dropdownItems,
+        onChanged: (value) {
+          setState(() {
+            selectedCurrency = value;
+          });
+        });
+  }
+
+  CupertinoPicker iOSPicker() {
+    List<Text> pickerItems = [];
+
+    for (String currency in currenciesList) {
+      Text item = Text(currency);
+      pickerItems.add(item);
+    }
+
+    return CupertinoPicker(
+      backgroundColor: Color(0xFFf9a825),
+      itemExtent: 30.0,
+      onSelectedItemChanged: (selectedIndex) {},
+      children: pickerItems,
+    );
   }
 
   @override
@@ -29,14 +55,8 @@ class _PriceScreenState extends State<PriceScreen> {
         title: Text(
           'CRYPTO LIVE PRICES',
           style: TextStyle(
+            color: Colors.black,
             fontWeight: FontWeight.bold,
-            shadows: <Shadow>[
-              Shadow(
-                offset: Offset(3.0, 3.0),
-                blurRadius: 6.0,
-                color: Color.fromARGB(100, 0, 0, 0),
-              ),
-            ],
           ),
         ),
       ),
@@ -70,15 +90,7 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Color(0xFF212121),
-            child: DropdownButton(
-                value: selectedCurrency,
-                iconSize: 40,
-                items: getDropdownItems(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedCurrency = value;
-                  });
-                }),
+            child:
           ),
         ],
       ),

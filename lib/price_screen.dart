@@ -26,7 +26,19 @@ class _PriceScreenState extends State<PriceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🤑 COIN TICKER'),
+        title: Text(
+          'CRYPTO LIVE PRICES',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(3.0, 3.0),
+                blurRadius: 6.0,
+                color: Color.fromARGB(100, 0, 0, 0),
+              ),
+            ],
+          ),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,9 +69,10 @@ class _PriceScreenState extends State<PriceScreen> {
             height: 150.0,
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
-            color: Color(0xFFFFC107),
+            color: Color(0xFF212121),
             child: DropdownButton(
                 value: selectedCurrency,
+                iconSize: 40,
                 items: getDropdownItems(),
                 onChanged: (value) {
                   setState(() {

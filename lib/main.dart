@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crypto_live/price_screen.dart';
 
 void main() {
   runApp(MyApp());

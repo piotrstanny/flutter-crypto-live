@@ -9,8 +9,8 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String selectedCurrency = 'USD';
-  String ethPriceInUsd = '?';
+  String selectedCurrency = currenciesList[0];
+  String ethPrice = '?';
 
   DropdownButton<String> androidDropdown() {
     List<DropdownMenuItem<String>> dropdownItems = [];
@@ -45,16 +45,21 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
       backgroundColor: Color(0xFFf9a825),
       itemExtent: 30.0,
-      onSelectedItemChanged: (selectedIndex) {},
+      onSelectedItemChanged: (selectedIndex) {
+        setState(() {
+          selectedCurrency = currenciesList[selectedIndex];
+          getPrice();
+        });
+      },
       children: pickerItems,
     );
   }
 
   void getPrice() async {
     try {
-      String temp = await CoinData().getCoinData();
+      String temp = await CoinData().getCoinData(selectedCurrency);
       setState(() {
-        ethPriceInUsd = temp;
+        ethPrice = temp;
       });
     } catch (e) {
       print(e);
@@ -94,7 +99,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 ETH = $ethPriceInUsd USD',
+                  '1 ETH = $ethPrice $selectedCurrency',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,

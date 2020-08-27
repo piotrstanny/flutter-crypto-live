@@ -38,9 +38,9 @@ String coinName;
 String coinPrice;
 
 class CoinData {
-  Future<String> getCoinData() async {
+  Future<String> getCoinData(String selectedCurrency) async {
     http.Response response =
-        await http.get('$coinApiUrl/ETH/USD?apikey=$coinApiKey');
+        await http.get('$coinApiUrl/ETH/$selectedCurrency?apikey=$coinApiKey');
 
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
@@ -48,7 +48,6 @@ class CoinData {
       print(jsonResponse);
       coinName = jsonResponse['asset_id_base'];
       coinPrice = jsonResponse['rate'].toStringAsFixed(2);
-      print('Coin: $coinName costs $coinPrice USD.');
       return coinPrice;
     } else {
       print(response.statusCode);

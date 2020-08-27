@@ -2,27 +2,21 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 const List<String> currenciesList = [
+  'USD',
+  'EUR',
+  'GBP',
+  'PLN',
   'AUD',
   'BRL',
   'CAD',
-  'CNY',
-  'EUR',
-  'GBP',
-  'HKD',
   'IDR',
-  'ILS',
   'INR',
   'JPY',
   'MXN',
-  'NOK',
   'NZD',
-  'PLN',
-  'RON',
   'RUB',
-  'SEK',
   'SGD',
-  'USD',
-  'ZAR'
+  'ZAR',
 ];
 
 const List<String> cryptoList = [

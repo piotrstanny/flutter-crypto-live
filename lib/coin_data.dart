@@ -28,24 +28,25 @@ const List<String> cryptoList = [
 const coinApiUrl = 'https://rest.coinapi.io/v1/exchangerate';
 const coinApiKey = 'BE3300AD-2960-4815-AEA9-F2F33A4F0010';
 
-String coinName;
-String coinPrice;
-
 class CoinData {
-  Future<String> getCoinData(String selectedCurrency) async {
-    http.Response response =
-        await http.get('$coinApiUrl/ETH/$selectedCurrency?apikey=$coinApiKey');
+  Future<Map> getCoinData(String selectedCurrency) async {
+    Map<String, String> cryptoPrices = {};
+    for (String crypto in cryptoList) {
+      String requestUrl =
+          '$coinApiUrl/$crypto/$selectedCurrency?apikey=$coinApiKey';
+      http.Response response = await http.get(requestUrl);
 
-    if (response.statusCode == 200) {
-      var jsonResponse = convert.jsonDecode(response.body);
-      print(response.statusCode);
-      print(jsonResponse);
-      coinName = jsonResponse['asset_id_base'];
-      coinPrice = jsonResponse['rate'].toStringAsFixed(2);
-      return coinPrice;
-    } else {
-      print(response.statusCode);
-      throw 'Problem with the get request';
+      if (response.statusCode == 200) {
+        var jsonResponse = convert.jsonDecode(response.body);
+        print(response.statusCode);
+        print(jsonResponse);
+        cryptoPrices[crypto] = jsonResponse['rate'].toStringAsFixed(2);
+      } else {
+        print(response.statusCode);
+        throw 'Problem with the get request';
+      }
     }
+    print(cryptoPrices);
+    return cryptoPrices;
   }
 }

@@ -11,7 +11,6 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = currenciesList[0];
   String price = '?';
-  String coin = 'BTC';
 
   DropdownButton<String> androidDropdown() {
     List<DropdownMenuItem<String>> dropdownItems = [];
@@ -57,11 +56,16 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
+  Map<String, String> coinValues = {};
+  bool isWaiting = false;
+
   void getPrice() async {
+    isWaiting = true;
     try {
-      String temp = await CoinData().getCoinData(selectedCurrency, 'ETH');
+      var data = await CoinData().getCoinData(selectedCurrency);
+      isWaiting = false;
       setState(() {
-        price = temp;
+        coinValues = data;
       });
     } catch (e) {
       print(e);
@@ -91,8 +95,9 @@ class _PriceScreenState extends State<PriceScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           CryptoCard(
-            selectedCoin: coin,
-            price: price,
+            selectedCoin: 'BTC',
+//            price: isWaiting ? '?' : coinValues['BTC'],
+            price: '342.53',
             selectedCurrency: selectedCurrency,
           ),
           Container(

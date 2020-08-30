@@ -76,11 +76,13 @@ class _PriceScreenState extends State<PriceScreen> {
   List<Widget> getCryptoList() {
     List<CryptoCard> cryptoCards = [];
 
-    cryptoCards.add(CryptoCard(
-      selectedCoin: 'BTC',
-      price: isWaiting ? '?' : coinValues['BTC'],
-      selectedCurrency: selectedCurrency,
-    ));
+    for (String crypto in cryptoList) {
+      cryptoCards.add(CryptoCard(
+        selectedCoin: crypto,
+        price: isWaiting ? '?' : coinValues[crypto],
+        selectedCurrency: selectedCurrency,
+      ));
+    }
     return cryptoCards;
   }
 

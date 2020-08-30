@@ -23,6 +23,8 @@ const List<String> cryptoList = [
   'BTC',
   'ETH',
   'LTC',
+  'XRP',
+  'BCH',
 ];
 
 const coinApiUrl = 'https://rest.coinapi.io/v1/exchangerate';
@@ -38,8 +40,6 @@ class CoinData {
 
       if (response.statusCode == 200) {
         var jsonResponse = convert.jsonDecode(response.body);
-        print(response.statusCode);
-        print(jsonResponse);
         cryptoPrices[crypto] = jsonResponse['rate'].toStringAsFixed(2);
       } else {
         print(response.statusCode);

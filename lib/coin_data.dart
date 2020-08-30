@@ -24,7 +24,6 @@ const List<String> cryptoList = [
   'ETH',
   'LTC',
   'XRP',
-  'BCH',
 ];
 
 const coinApiUrl = 'https://rest.coinapi.io/v1/exchangerate';

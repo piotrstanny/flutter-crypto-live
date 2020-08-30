@@ -73,6 +73,17 @@ class _PriceScreenState extends State<PriceScreen> {
     }
   }
 
+  List<Widget> getCryptoList() {
+    List<CryptoCard> cryptoCards = [];
+
+    cryptoCards.add(CryptoCard(
+      selectedCoin: 'BTC',
+      price: isWaiting ? '?' : coinValues['BTC'],
+      selectedCurrency: selectedCurrency,
+    ));
+    return cryptoCards;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -97,18 +108,7 @@ class _PriceScreenState extends State<PriceScreen> {
         children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              CryptoCard(
-                selectedCoin: 'BTC',
-                price: isWaiting ? '?' : coinValues['BTC'],
-                selectedCurrency: selectedCurrency,
-              ),
-              CryptoCard(
-                selectedCoin: 'BTC',
-                price: isWaiting ? '?' : coinValues['BTC'],
-                selectedCurrency: selectedCurrency,
-              ),
-            ],
+            children: getCryptoList(),
           ),
           Container(
             height: 150.0,

@@ -35,7 +35,6 @@ class CoinData {
       String requestUrl =
           '$coinApiUrl/$crypto/$selectedCurrency?apikey=$coinApiKey';
       http.Response response = await http.get(requestUrl);
-      print(requestUrl);
 
       if (response.statusCode == 200) {
         var jsonResponse = convert.jsonDecode(response.body);

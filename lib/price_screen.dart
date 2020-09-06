@@ -40,12 +40,15 @@ class _PriceScreenState extends State<PriceScreen> {
     List<Text> pickerItems = [];
 
     for (String currency in currenciesList) {
-      Text item = Text(currency);
+      Text item = Text(
+        currency,
+        style: TextStyle(color: Colors.white),
+      );
       pickerItems.add(item);
     }
 
     return CupertinoPicker(
-      backgroundColor: Color(0xFFf9a825),
+      backgroundColor: Colors.grey[800],
       itemExtent: 30.0,
       onSelectedItemChanged: (selectedIndex) {
         setState(() {

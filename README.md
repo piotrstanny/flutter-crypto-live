@@ -1,6 +1,8 @@
 # flutter_crypto_live
 
-Flutter Mobile App - watch live crypto prices in different currencies
+Flutter Mobile App - get current crypto prices in different currencies. Using coinAPI data.
+
+![Cryptocurrency live prices](https://media.giphy.com/media/gh0eJi4KmcpeNsXVBV/giphy.gif)
 
 ## Getting Started
 
